@@ -1,0 +1,39 @@
+%
+%   Draw a tree diagram for resonant triads for 180/90/60-day waves
+%
+\documentclass{article}
+\usepackage{forest}
+
+\begin{document}
+\thispagestyle{empty}
+
+\begin{figure}[ht]
+\centering
+
+% ---- Tree ----
+\begin{minipage}{0.35\textwidth}
+\begin{forest}
+for tree={
+  grow'=south,
+  parent anchor=south,
+  child anchor=north,
+  align=center,
+  edge={},
+  s sep=6pt,     % horizontal sibling separation
+  l sep=18pt,    % vertical level separation
+  inner sep=1pt, % node padding
+}
+[R$_1$
+  [R$_3$  [R$_3$]  [R$_1$]]
+  [R$_2$  [R$_2$]  [M]    ]
+  [R$_1$  [R$_3$]  [R$_1$]]
+  [K      [R$_3$]  [R$_1$]]
+   ]
+\end{forest}
+\end{minipage}
+
+\end{figure}
+
+\end{document}
+
+

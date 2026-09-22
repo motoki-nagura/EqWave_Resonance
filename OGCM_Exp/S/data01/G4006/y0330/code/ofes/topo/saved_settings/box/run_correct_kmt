@@ -1,0 +1,38 @@
+#! /bin/bash
+#
+#   correct kmt in comparison with older one
+#
+
+MOMupdate="/S/data05/G4006/y0330/code/oifes_glb0p5_vh/topo"
+WORK="/S/data05/G4006/y0330/data/tmp"
+OUT="/S/data05/G4006/y0330/data/TOPOG/mine_0-360e_vh"
+OLD="/S/data05/G4006/y0330/data/TOPOG/mine_0-360e"
+
+if [ ! -f $OUT"/kmt.dta.orig" ]; then
+  echo "create kmt.dta.orig under "$OUT
+  echo "EXIT"
+  exit
+fi
+
+if [ -f $OUT"/kmt.dta" ]; then
+  echo "remove kmt.dta under "$OUT" first"
+  echo "EXIT"
+  exit
+fi
+
+
+cd $WORK
+
+cp $MOMupdate/correct_kmt.f90 .
+
+if [ -f correct_kmt.out ]; then rm correct_kmt.out; fi
+
+f90 -o correct_kmt.out correct_kmt.f90
+rm *.f90
+
+ls $OLD/kmt.dta       >  fort.21
+ls $OUT/kmt.dta.orig  >  fort.22
+echo $OUT/kmt.dta     >  fort.41
+
+./correct_kmt.out
+

@@ -1,0 +1,24 @@
+#! /bin/csh -f
+#
+#   convert ht.dta to ht.dta.bin
+#
+
+set MOMupdate = /S/data01/G4006/y0330/code/ofes/topo/saved_settings/box
+set WORK = /S/data01/G4006/y0330/data/ofes_exp/tmp
+set OUT = /S/data01/G4006/y0330/data/ofes_exp/settings/box_cyclic_RoughBottom/topog/nc
+
+cd $WORK
+
+cp $MOMupdate/read_ht.F .
+
+nfort -o read_ht.out read_ht.F
+rm $WORK/*.F
+
+setenv VE_FORT_UFMTENDIAN ALL
+#setenv VE_FORT_RECLUNIT WORD
+setenv VE_ACC_IO 1
+
+cp $OUT/../ht.dta .
+./read_ht.out
+
+mv ht.dta.bin $OUT

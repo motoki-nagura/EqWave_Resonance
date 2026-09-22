@@ -1,0 +1,24 @@
+#! /bin/csh -f
+#
+#   convert kmt.dta to kmt.bin
+#
+
+set MOMupdate = /S/data01/G4006/y0330/code/ofes/topo/saved_settings/box
+set WORK = /S/data01/G4006/y0330/data/ofes_exp/tmp
+set OUT = /S/data01/G4006/y0330/data/ofes_exp/settings/box_bounded/topog/
+
+cd $WORK
+
+cp $MOMupdate/read_kmt.F .
+
+nfort -o read_kmt.out read_kmt.F
+rm $WORK/*.F
+
+setenv VE_FORT_UFMTENDIAN ALL
+setenv VE_FORT_RECLUNIT WORD
+setenv VE_ACC_IO 1
+
+cp $OUT/kmt.dta .
+./read_kmt.out
+
+mv kmt.dta.bin $OUT

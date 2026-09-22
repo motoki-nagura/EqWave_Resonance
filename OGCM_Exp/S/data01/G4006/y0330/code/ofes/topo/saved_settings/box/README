@@ -1,0 +1,72 @@
+0.
+qlogin -q ve_I
+cd to this directory
+
+
+1.
+module NECSDK/all
+./run_grids
+   Generates a grid
+
+   Program: grids.F  
+   Output: grid.dta.out, results_grids 
+             are saved in $OUT
+
+
+2.
+   Edit and copy size.h to $OUT
+
+
+3.
+./run_topog
+   Generates topography
+
+   Program: topog.F
+   Input: grid.dta.out, /S/data01/G4006/y0003/DATASET/TOPOG/ETOPO1/etopo1.dbl
+   Output: kmt.dta, ht.dta
+             are saved in $OUT
+
+4.
+./run_correct_kmt
+   Copy kmt=0 from mine_0-360e/kmt.dta
+
+   Program: correct_kmt.f90
+   Input:  /S/data05/G4006/y0330/data/TOPOG/mine_0-360e_vh/kmt.dta.orig
+           /S/data05/G4006/y0330/data/TOPOG/mine_0-360e/kmt.dta
+   Output: /S/data05/G4006/y0330/data/TOPOG/mine_0-360e_vh/kmt.dta
+
+
+5.
+Edit kmt.dta by hand
+
+
+6.
+./run_read_kmt
+   Generates kmt.dta.bin for grads visualization
+   Edit imt and kmt in read_kmt.F before running
+
+   Input:  kmt.dta
+   Output: kmt.dta.bin
+
+   Edit kmt.ctl. Notice kmt(imt-2,jmt-2) for output
+   If Error happens, modify kmt.dta
+
+
+7.
+./run_topog_m
+   Generates ht.dta corresponding to edited kmt.dta
+
+   Program: topog_m.F
+   Input: kmt.dta, grid.dta.out, /S/data05/G4006/y0003/DATABASE/TOPOG/ETOPO1/etopo1.dbl
+   Output: ht.dta
+
+
+8.
+./run_read_ht
+   Generates ht.dta.bin for grads visualization
+
+   Input:  ht.dta
+   Output: ht.dta.bin
+
+   Edit ht.ctl. Notice ht(imt-2,jmt-2) for output
+
