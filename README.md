@@ -1,4 +1,4 @@
-# OGCM EXPERIMENTS MODEL RUN AND ANALYSIS CODE
+# OGCM Experiments Model Run and Analysis Code for Nagura (2026, JPO)
 
 This repository contains Python/Julia scripts and related utilities used for numerical experiments and the analysis done by Nagura (2026, "Triad resonance between vertically propagating equatorial waves in an idealized OGCM", submitted to J. Phys. Oceanogr.).
 
