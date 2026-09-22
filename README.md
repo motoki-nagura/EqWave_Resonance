@@ -24,4 +24,3 @@ Depending on where the repository is cloned, the repository root may need to be 
 ## Notes
 
 This repository contains selected research code rather than the complete original working directory. Some scripts may depend on datasets or software packages that are not included in the repository.
-# EqWave_Resonance
